@@ -48,7 +48,7 @@ public class SwordForge
 
     @SubscribeEvent
     public static void addCreativeTabs(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTab() == CreativeModeTabs.COMBAT) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(ModItems.COOL_SWORD.get());
         }
     }

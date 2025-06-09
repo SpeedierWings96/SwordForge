@@ -2,6 +2,7 @@ package com.example.swordforge;
 
 import com.mojang.logging.LogUtils;
 import com.example.swordforge.item.ModItems;
+import com.example.swordforge.entity.ModEntities;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -12,6 +13,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -32,6 +34,7 @@ public class SwordForge
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        com.example.swordforge.entity.ModEntities.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -60,8 +63,8 @@ public class SwordForge
     public static class ClientModEvents
     {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            net.minecraft.client.renderer.entity.EntityRenderers.register(ModEntities.STORM_LIGHTNING.get(), com.example.swordforge.client.renderer.StormLightningRenderer::new);
 
         }
     }
